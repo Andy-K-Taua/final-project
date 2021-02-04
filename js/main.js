@@ -47,9 +47,10 @@ function preload ()
     this.load.image('sky', 'components/images/sky.png');
     this.load.image('sky1', 'components/images/space1.png');
     this.load.image('ground', 'components/images/ground_1x1.png');
+    this.load.image('grass', 'components/images/ground.png');
     this.load.image('alphabet', 'alphabet/letter_A.png');
     this.load.spritesheet('dragon', 'components/spritesheets/dragon.png', { frameWidth: 96, frameHeight:63 });
-    this.load.spritesheet('Ninja', 'components/spritesheets/SpiderMan.png', { frameWidth: 32, frameHeight: 48 });
+    this.load.spritesheet('Ninja', 'components/spritesheets/metalslug_monster39x40.png', { frameWidth: 39, frameHeight: 40 });
     this.load.spritesheet('mummy', 'components/spritesheets/mummy37x45.png', { frameWidth: 37, frameHeight: 45 });
     this.load.spritesheet('boom', 'components/spritesheets/explosion.png', { frameWidth: 64, frameHeight: 64, endFrame: 23 });
 }
@@ -58,7 +59,7 @@ function create () {
 
   this.add.text(100, 1800, 'STAGE 1 JUMP ^', { color: '#00ff00' }).setOrigin(0.5, 0);
   this.add.text(100, 1000, 'STAGE 2 CREEP >', { color: '#00ff00' }).setOrigin(0.5, 0);
-  this.add.text(100, 650, 'LAST STAGE ^', { color: '#00ff00' }).setOrigin(0.5, 0);
+  // this.add.text(100, 650, 'LAST STAGE ^', { color: '#00ff00' }).setOrigin(0.5, 0);
 
 
 
@@ -76,7 +77,7 @@ function create () {
 
     platforms.create(-150, 235, 'ground');
     platforms.create(750, 410, 'ground');
-    platforms.create(300, 585,'ground')
+    platforms.create(300, 585,'grass')
     platforms.create(600, 760, 'ground');
     platforms.create(-150, 935, 'ground');
     platforms.create(750, 1110, 'ground');

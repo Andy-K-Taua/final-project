@@ -51,21 +51,28 @@ function preload ()
     this.load.spritesheet('dragon', 'components/spritesheets/dragon.png', { frameWidth: 96, frameHeight:63 });
     this.load.spritesheet('Ninja', 'components/spritesheets/SpiderMan.png', { frameWidth: 32, frameHeight: 48 });
     this.load.spritesheet('mummy', 'components/spritesheets/mummy37x45.png', { frameWidth: 37, frameHeight: 45 });
+    this.load.spritesheet('boom', 'components/spritesheets/explosion.png', { frameWidth: 64, frameHeight: 64, endFrame: 23 });
 }
 
 function create () {
+
+  this.add.text(100, 1800, 'STAGE 1 JUMP ^', { color: '#00ff00' }).setOrigin(0.5, 0);
+  this.add.text(100, 1000, 'STAGE 2 CREEP >', { color: '#00ff00' }).setOrigin(0.5, 0);
+  this.add.text(100, 650, 'LAST STAGE ^', { color: '#00ff00' }).setOrigin(0.5, 0);
+
 
 
     //This.add.image allows to add images after preloading the asset and assigning a key. Below is an example of the sky
 
     // this.add.image(400, 300, 'sky'); // Actual
     this.add.image(400, 300, 'sky');
+    // this.add.image(400, 200, 'sky')
 
 
     //  for each platform we are adding a physics function with a staticGroup method.
     platforms = this.physics.add.staticGroup();
 
-    //  Here we create the ground.
+    //  Here we create the different platforms.
 
     platforms.create(-150, 235, 'ground');
     platforms.create(750, 410, 'ground');
@@ -80,15 +87,15 @@ function create () {
 
     platforms.create(400, 1985, 'ground').setScale(1).refreshBody();
 
-//=========================================================
+    //=========================================================
 
-//This creates a new sprite called 'player' positioned at 100 x 450 pixels from the bottom of the game. This has a Dynamice Physics body by default. This sprite variable 'player' is then given a slight bounce of 0.1. It is then set to 'collide' with the 'worldbounds'.
+    //This creates a new sprite called 'player' positioned at 100 x 450 pixels from the bottom of the game. This has a Dynamice Physics body by default. This sprite variable 'player' is then given a slight bounce of 0.1. It is then set to 'collide' with the 'worldbounds'.
 
 
-    // The player and its settings
-    // player = this.physics.add.sprite(80, 530, 'Ninja'); //Top floor
-    player = this.physics.add.sprite(80, 1220, 'Ninja'); //Third floor
-    // player = this.physics.add.sprite(80, 1900, 'Ninja'); //Bottom floor
+    // The player (position on the x axis, height) - calling the player 'Ninja'
+    // player = this.physics.add.sprite(80, 100, 'Ninja'); //Top floor for testing
+    // player = this.physics.add.sprite(80, 1220, 'Ninja'); //Third floor for testing
+    player = this.physics.add.sprite(80, 1900, 'Ninja'); //Bottom floor for testing
 
 
     // game.camera.follow(player);
@@ -105,8 +112,9 @@ function create () {
 
     this.cameras.main.setZoom(1);
 
-//========================================
-cursors = this.input.keyboard.createCursorKeys();
+    //=======================keyboard(cursor functions)=======
+
+    cursors = this.input.keyboard.createCursorKeys();
 
 
     //  This is where the animation of the character takes place walking left, walking right and turning.
@@ -130,12 +138,12 @@ cursors = this.input.keyboard.createCursorKeys();
         repeat: -1
     });
 
-    //======================================================
+      //======================================================
 
 
-    //  Input Events
+     //  Input Events
 
-// Here is where the letters are created. Moving from left to right along the x axis we have put in a value of 90px. There are 10 letters in the console however in this code we obviously start from the number 0
+     // Here is where the letters are created. Moving from left to right along the x axis we have put in a value of 90px. There are 10 letters in the console however in this code we obviously start from the number 0
     letters = this.physics.add.group({
         key: 'alphabet',
         repeat: 9,
@@ -161,6 +169,7 @@ cursors = this.input.keyboard.createCursorKeys();
     // this.physics.add.collider(enemy, platforms);
 
     //  Checks to see if the player overlaps with any of the letters, if he does call the collectLetters function
+
     this.physics.add.overlap(player, letters, collectLetters, null, this);
 
     this.physics.add.collider(player, dragon, hitDragon, null, this);
@@ -226,7 +235,7 @@ cursors = this.input.keyboard.createCursorKeys();
           }
         },
 
-    }); //end of tweens function
+     }); //end of tweens function2
 
 
 } // end of create funciton.
@@ -286,7 +295,7 @@ function collectLetters (player, alphabet)
         });
 
 
-//========================Dragon====================
+       //========================Dragon====================
 
         var x1 = (player.x1 < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
 
@@ -300,8 +309,7 @@ function collectLetters (player, alphabet)
 
 } //end of function collect letters
 
-function hitDragon (player, dragon, mummy)
-{
+function hitDragon (player, dragon) {
     this.physics.pause();
 
     player.setTint(0xffffff);

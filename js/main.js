@@ -168,22 +168,44 @@ cursors = this.input.keyboard.createCursorKeys();
 
 //==============Mummy Animation==================================
 
-    const mummy = this.anims.create({
-            key: 'walk',
-            frames: this.anims.generateFrameNumbers('mummy'),
-            frameRate: 16
-        });
+    const mummyAnimation = this.anims.create({
+        key: 'walk',
+        frames: this.anims.generateFrameNumbers('mummy'),
+        frameRate: 16,
+        repeat: -1
+    });
+    // console.log('this', this);
+    const sprite = this.add.sprite(30, 549, 'mummy').setScale(1).setFlipX(true); //Positioning on page
+    // window.mummy = sprite;
+    sprite.anims.play('walk', true);
+    // sprite.anims.play({ key: 'walk', repeat: 300 });
+    sprite.yoyoCounter = 0;
+    this.tweens.add({
+        yoyo: true,
+        repeat: -1,
+        targets: sprite,
+        x: 700, // x axis from 50-750..
+        duration: 8000, //duration to reach end of x axis
+        ease: 'Linear',
+        onActive: function () {
+          // sprite.setFlipX(true);
+          // console.log('onActive');
+        sprite.toggleFlipX();
 
-        const sprite = this.add.sprite(50, 549, 'mummy').setScale(1); //Positioning on page
+        },
+        // onStart: function () { console.log('onStart') },
+        // onLoop: function () { console.log('onLoop') },
+        onYoyo: function (args) {
+          sprite.yoyoCounter ++;
+          // console.log('args', args);
+          if ( sprite.yoyoCounter % 2 === 0 ) {
+            sprite.toggleFlipX();
+          }
+        },
+        // onRepeat: function () { console.log('onRepeat') },
+        // onComplete: function () { console.log('onComplete') }
 
-        sprite.play({ key: 'walk', repeat: 300 });
-
-        this.tweens.add({
-            targets: sprite,
-            x: 750, // x axis from 50-750..
-            duration: 88000, //duration to reach end of x axis
-            ease: 'Linear'
-        });
+    });
 
 
 } // end of create funciton.
@@ -267,4 +289,4 @@ function hitDragon (player, dragon, mummy)
 
     gameOver = true;
 
-} //End of hit dragon funciton
+} //End of hit dragon function

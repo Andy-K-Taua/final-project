@@ -77,7 +77,7 @@ function create () {
 
     platforms.create(-150, 235, 'ground');
     platforms.create(750, 410, 'ground');
-    platforms.create(300, 585,'grass')
+    platforms.create(300, 585,'ground')
     platforms.create(600, 760, 'ground');
     platforms.create(-150, 935, 'ground');
     platforms.create(750, 1110, 'ground');
@@ -121,7 +121,7 @@ function create () {
     //  This is where the animation of the character takes place walking left, walking right and turning.
     this.anims.create({
         key: 'left',
-        frames: this.anims.generateFrameNumbers('Ninja', { start: 0, end: 3 }),
+        frames: this.anims.generateFrameNumbers('Ninja', { start: 0, end: 16 }),
         frameRate: 10,
         repeat: -1
     });
@@ -134,7 +134,7 @@ function create () {
 
     this.anims.create({
         key: 'right',
-        frames: this.anims.generateFrameNumbers('Ninja', { start: 5, end: 8 }),
+        frames: this.anims.generateFrameNumbers('Ninja', { start: 0, end: 16 }),
         frameRate: 10,
         repeat: -1
     });

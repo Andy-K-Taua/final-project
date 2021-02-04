@@ -62,12 +62,11 @@ function create () {
     this.add.image(400, 300, 'sky');
 
 
-    //  The platforms group contains the ground and the ledges we can jump on
+    //  for each platform we are adding a physics function with a staticGroup method.
     platforms = this.physics.add.staticGroup();
 
     //  Here we create the ground.
 
-    //  Scale it to fit the width of the game
     platforms.create(-150, 235, 'ground');
     platforms.create(750, 410, 'ground');
     platforms.create(300, 585,'ground')
@@ -87,14 +86,15 @@ function create () {
 
 
     // The player and its settings
-    player = this.physics.add.sprite(80, 80, 'Ninja'); //Testing
-    // player = this.physics.add.sprite(80, 1900, 'Ninja'); //Actual
+    // player = this.physics.add.sprite(80, 530, 'Ninja'); //Top floor
+    player = this.physics.add.sprite(80, 1220, 'Ninja'); //Third floor
+    // player = this.physics.add.sprite(80, 1900, 'Ninja'); //Bottom floor
 
 
     // game.camera.follow(player);
 
     //  Player physics properties. Gives the the ninja a slight bounce.
-    player.setBounce(0.2);
+    player.setBounce(0.4);
     player.setCollideWorldBounds(true);
     player.setCollideWorldBounds(true);
 
@@ -166,7 +166,7 @@ cursors = this.input.keyboard.createCursorKeys();
     this.physics.add.collider(player, dragon, hitDragon, null, this);
 
 
-//==============Mummy Animation==================================
+           //=====================Mummy Animation==================================
 
     const mummyAnimation = this.anims.create({
         key: 'walk',
@@ -176,36 +176,57 @@ cursors = this.input.keyboard.createCursorKeys();
     });
     // console.log('this', this);
     const sprite = this.add.sprite(30, 549, 'mummy').setScale(1).setFlipX(true); //Positioning on page
+    const sprite1 = this.add.sprite(355, 1073, 'mummy').setScale(1).setFlipX(true); //Positioning on page
     // window.mummy = sprite;
     sprite.anims.play('walk', true);
+    sprite1.anims.play('walk', true);
     // sprite.anims.play({ key: 'walk', repeat: 300 });
     sprite.yoyoCounter = 0;
+    sprite1.yoyoCounter = 0;
+
+
     this.tweens.add({
         yoyo: true,
         repeat: -1,
         targets: sprite,
-        x: 700, // x axis from 50-750..
+        x: 700, // x axis from 50-700..
         duration: 8000, //duration to reach end of x axis
         ease: 'Linear',
         onActive: function () {
-          // sprite.setFlipX(true);
-          // console.log('onActive');
+
         sprite.toggleFlipX();
 
-        },
-        // onStart: function () { console.log('onStart') },
-        // onLoop: function () { console.log('onLoop') },
+      }, //end of onActive key function
+
         onYoyo: function (args) {
           sprite.yoyoCounter ++;
-          // console.log('args', args);
           if ( sprite.yoyoCounter % 2 === 0 ) {
             sprite.toggleFlipX();
           }
         },
-        // onRepeat: function () { console.log('onRepeat') },
-        // onComplete: function () { console.log('onComplete') }
 
-    });
+
+    }); //end of tweens function
+
+    this.tweens.add({
+        yoyo: true,
+        repeat: -1,
+        targets: sprite1,
+        x: 790,
+        duration: 8000,
+        ease: 'Linear',
+        onActive: function () {
+        sprite1.toggleFlipX();
+
+        },
+        onYoyo: function (args) {
+          sprite1.yoyoCounter ++;
+          if ( sprite1.yoyoCounter % 2 === 0 ) {
+            sprite1.toggleFlipX();
+          }
+        },
+
+    }); //end of tweens function
 
 
 } // end of create funciton.

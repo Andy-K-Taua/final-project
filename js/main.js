@@ -96,7 +96,7 @@ function create () {
     // The player (position on the x axis, height) - calling the player 'Ninja'
     // player = this.physics.add.sprite(80, 100, 'Ninja'); //Top floor for testing
     // player = this.physics.add.sprite(80, 1220, 'Ninja'); //Third floor for testing
-    player = this.physics.add.sprite(80, 1900, 'Ninja'); //Bottom floor for testing
+    player = this.physics.add.sprite(80, 1900, 'Ninja').setScale(1); //Bottom floor for testing
 
 
     // game.camera.follow(player);
@@ -111,7 +111,7 @@ function create () {
 
     this.cameras.main.startFollow(player);
 
-    this.cameras.main.setZoom(1);
+    this.cameras.main.setZoom(2);
 
     //=======================keyboard(cursor functions)=======
 

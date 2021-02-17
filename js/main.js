@@ -111,7 +111,7 @@ function create () {
 
     this.cameras.main.startFollow(player);
 
-    this.cameras.main.setZoom(2);
+    this.cameras.main.setZoom(1);
 
     //=======================keyboard(cursor functions)=======
 

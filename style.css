@@ -1,6 +1,7 @@
 canvas
 {
+border-radius: 30px;
 display : block;
 margin : auto;
-padding-top: 60px;
+/* padding-top: 80px; */
 }

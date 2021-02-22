@@ -3,7 +3,7 @@
 //We will set up the config object and we start by setting the canvas below at the height of 600 and the width to 800.
 
 const config = {
-    type: Phaser.AUTO,
+    type: Phaser.WebGL,
     width: 800,
     height: 600,
     pixelArt: true,
@@ -97,8 +97,6 @@ function create () {
     // player = this.physics.add.sprite(80, 100, 'Ninja'); //Top floor for testing
     // player = this.physics.add.sprite(80, 1220, 'Ninja'); //Third floor for testing
     player = this.physics.add.sprite(80, 1900, 'Ninja').setScale(1); //Bottom floor for testing
-
-
     // game.camera.follow(player);
 
     //  Player physics properties. Gives the the ninja a slight bounce.
@@ -117,11 +115,11 @@ function create () {
 
     cursors = this.input.keyboard.createCursorKeys();
 
-
+    // const Ninja1 = player.setFlipX(true)
     //  This is where the animation of the character takes place walking left, walking right and turning.
     this.anims.create({
         key: 'left',
-        frames: this.anims.generateFrameNumbers('Ninja', { start: 0, end: 16 }),
+        frames: this.anims.generateFrameNumbers('Ninja', { start: 0, end: 20 }),
         frameRate: 10,
         repeat: -1
     });
@@ -134,9 +132,10 @@ function create () {
 
     this.anims.create({
         key: 'right',
-        frames: this.anims.generateFrameNumbers('Ninja', { start: 0, end: 16 }),
+        frames: this.anims.generateFrameNumbers('Ninja', { start: 0, end: 20 }),
         frameRate: 10,
         repeat: -1
+
     });
 
       //======================================================
